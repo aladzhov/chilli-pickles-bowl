@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {GameSetupsComponent} from './setup/game-setups.component/game-setups.component';
+import {KeepAlive} from './keep-alive/keep-alive';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [GameSetupsComponent, KeepAlive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

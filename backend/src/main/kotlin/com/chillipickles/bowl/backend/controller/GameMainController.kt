@@ -20,6 +20,11 @@ class GameMainController {
         return "index.html"
     }
 
+    @GetMapping("/api/keep-alive")
+    fun keepAlive() {
+        LOGGER.info("keeping alive")
+    }
+
     @GetMapping("/api/setup/setups")
     @ResponseBody
     fun gameSetups(): List<GameDto> {
@@ -27,6 +32,7 @@ class GameMainController {
 
         val sampleGame = GameDto(
             id = 1,
+            name = "Gyuvetch League 1st round",
             players = listOf(
                 PlayerDto(1, "Martin", "rerolls=2", 0),
                 PlayerDto(2, "Rossen", "rerolls=3", 0)

@@ -1,5 +1,6 @@
 export class Game {
   id!: number;
+  name!: string;
   players!: Player[];
   pieces!: Piece[];
   field!: Field;

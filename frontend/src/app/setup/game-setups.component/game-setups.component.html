@@ -1,3 +1,4 @@
+<div>
 @if (setups()) {
   <table>
     <thead>
@@ -8,8 +9,8 @@
     <tbody>
       @for (setup of setups(); track setup.id) {
         <td>{{ setup.name }}</td>
-        <td>{{ setup.field.main }}</td>
-        <td>{{ setup.dice }}</td>
+        <td>{{ setup.field.type }}</td>
+        <td>{{ setup.dice?.length }}</td>
       }
     </tbody>
   </table>
@@ -17,3 +18,4 @@
   <p>No setups...</p>
   <button>Create a new</button>
 }
+</div>

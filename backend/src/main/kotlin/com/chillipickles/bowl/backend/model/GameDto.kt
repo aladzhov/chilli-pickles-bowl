@@ -2,6 +2,7 @@ package com.chillipickles.bowl.backend.model
 
 data class GameDto(
     val id: Int,
+    val name: String,
     val players: List<PlayerDto>,
     val pieces: List<PieceDto>,
     val field: FieldDto,
