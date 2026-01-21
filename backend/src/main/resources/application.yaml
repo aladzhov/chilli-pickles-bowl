@@ -2,7 +2,9 @@ spring:
   application:
     name: backend
   datasource:
-    url: "jdbc:${DATABASE_URL:postgresql://bowl_user:bowl_pass@localhost:5433/cp_bowl}"
+    url: "${DATABASE_URL:jdbc:postgresql://localhost:5433/cp_bowl}"
+    username: "${DATABASE_USERNAME:bowl_user}"
+    password: "${DATABASE_PASSWORD:bowl_pass}"
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

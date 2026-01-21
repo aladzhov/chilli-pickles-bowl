@@ -3,6 +3,7 @@ package com.chillipickles.bowl.backend.controller
 import com.chillipickles.bowl.backend.model.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ResponseBody
@@ -21,8 +22,9 @@ class GameMainController {
     }
 
     @GetMapping("/api/keep-alive")
-    fun keepAlive() {
+    fun keepAlive(): ResponseEntity<Unit> {
         LOGGER.info("keeping alive")
+        return ResponseEntity.ok().build()
     }
 
     @GetMapping("/api/setup/setups")
