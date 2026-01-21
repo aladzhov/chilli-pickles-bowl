@@ -1,5 +1,5 @@
-# Stage 1: Build Angular
-FROM node:22-alpine as frontend-build
+# STAGE 1: Build the Angular Frontend
+FROM node:22.11.0-alpine AS frontend-build
 WORKDIR /build
 COPY frontend/package*.json ./
 RUN npm install
@@ -11,7 +11,7 @@ FROM eclipse-temurin:21-jdk-alpine AS backend-build
 WORKDIR /app
 COPY . .
 COPY --from=frontend-build /build/dist/*/browser/* /app/backend/src/main/resources/static/
-RUN ./gradlew :backend:build -x test
+RUN ./gradlew :backend:build -x test -x :frontend:npmInstall -x :frontend:npmBuild
 
 # STAGE 3: Final Runtime Image
 FROM eclipse-temurin:21-jre-alpine
