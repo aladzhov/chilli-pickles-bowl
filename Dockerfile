@@ -9,6 +9,7 @@ RUN npm run build
 # STAGE 2: Build the Spring Boot Backend
 FROM eclipse-temurin:21-jdk-alpine AS backend-build
 WORKDIR /app
+ENV DOCKER_BUILD=true
 COPY . .
 COPY --from=frontend-build /build/dist/*/browser/* /app/backend/src/main/resources/static/
 RUN ./gradlew :backend:build -x test -x :frontend:npmInstall

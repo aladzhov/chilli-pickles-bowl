@@ -54,22 +54,24 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-node {
-    download.set(true)
-    version.set("22.21.1")
-    nodeProjectDir.set(project(":frontend").projectDir)
-}
+if (System.getenv("DOCKER_BUILD") == null) {
+    node {
+        download.set(true)
+        version.set("22.21.1")
+        nodeProjectDir.set(project(":frontend").projectDir)
+    }
 
-val buildAngular = tasks.register<com.github.gradle.node.npm.task.NpmTask>("buildAngular") {
-    dependsOn(":frontend:npmInstall")
-    args.set(listOf("run", "build"))
-}
+    val buildAngular = tasks.register<com.github.gradle.node.npm.task.NpmTask>("buildAngular") {
+        dependsOn(":frontend:npmInstall")
+        args.set(listOf("run", "build"))
+    }
 
-tasks.processResources {
-    // This tells Gradle: "Before processing resources, run the Angular build"
-    dependsOn(buildAngular)
+    tasks.processResources {
+        // This tells Gradle: "Before processing resources, run the Angular build"
+        dependsOn(buildAngular)
 
-    from("${project.projectDir}/../frontend/dist/browser") {
-        into("static")
+        from("${project.projectDir}/../frontend/dist/browser") {
+            into("static")
+        }
     }
 }
