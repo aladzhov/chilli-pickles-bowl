@@ -11,7 +11,7 @@ FROM eclipse-temurin:21-jdk-alpine AS backend-build
 WORKDIR /app
 COPY . .
 COPY --from=frontend-build /build/dist/*/browser/* /app/backend/src/main/resources/static/
-RUN ./gradlew :backend:build -x test -x :frontend:npmInstall -x :frontend:npmBuild
+RUN ./gradlew :backend:build -x test -x :frontend:npmInstall
 
 # STAGE 3: Final Runtime Image
 FROM eclipse-temurin:21-jre-alpine
