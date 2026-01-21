@@ -2,7 +2,7 @@ services:
   - type: web
     name: chilli-pickles-bowl-app
     runtime: java
-    buildCommand: ./gradlew build
+    buildCommand: ./gradlew :frontend:build :backend:build
     startCommand: java -jar backend/build/libs/backend-0.0.1.jar
     envVars:
       - key: SPRING_PROFILES_ACTIVE
