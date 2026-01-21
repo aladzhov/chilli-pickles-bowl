@@ -1,0 +1,19 @@
+@if (setups()) {
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Field</th>
+      <th>Dice</th>
+    </thead>
+    <tbody>
+      @for (setup of setups(); track setup.id) {
+        <td>{{ setup.name }}</td>
+        <td>{{ setup.field.main }}</td>
+        <td>{{ setup.dice }}</td>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p>No setups...</p>
+  <button>Create a new</button>
+}
