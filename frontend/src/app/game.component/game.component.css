@@ -36,6 +36,22 @@
   aspect-ratio: 1 / 1; /* force square cells: width == height */
 }
 
+/* small centered overlay that shows coordinates when toggled */
+.cell-coords {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* let clicks pass to the cell */
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.32);
+  font-size: 1rem;
+  mix-blend-mode: normal;
+  border-radius: 2px;
+}
+
 /* make the game host cover the entire viewport and layout children left/right.
    Important: align-items: stretch so children fill dialog height. */
 .game-dialog {
@@ -75,6 +91,30 @@
   background: rgba(255,255,255,0.96);
   border: 1px solid rgba(0,0,0,0.04);
   box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+/* make pieces visually interactive */
+app-piece {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* selected piece visual: outline + subtle lift */
+app-piece.selected {
+  outline: 3px solid rgba(255, 179, 71, 0.95);
+  outline-offset: -4px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+/* ensure the piece host doesn't introduce extra spacing inside cells */
+.cell-inner > app-piece {
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
 }
 
 /* responsive fallback: stack vertically on narrow screens */

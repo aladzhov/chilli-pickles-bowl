@@ -1,6 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Game} from '../objects/game.data';
+import {Game, Piece} from '../objects/game.data';
 import { SecondaryAreaComponent } from '../secondary-area.component/secondary-area.component';
 import {PieceComponent} from '../piece.component/piece.component';
 
@@ -18,6 +18,34 @@ export class GameComponent {
 
   @Output()
   closeRequest = new EventEmitter<void>();
+
+  selectedPieceId: number | null = null;
+
+  selectPiece(event: MouseEvent, piece: Piece): void {
+    event.stopPropagation();
+    if (this.selectedPieceId === piece.id) {
+      this.selectedPieceId = null;
+    } else {
+      this.selectedPieceId = piece.id;
+    }
+  }
+
+  isSelected(piece: Piece): boolean {
+    return this.selectedPieceId != null && String(this.selectedPieceId) === String(piece.id);
+  }
+
+  onCellClick(event: MouseEvent, x: number, y: number): void {
+    event.stopPropagation();
+    const piece = this.piecesAt(x, y);
+    if (piece && piece.length) {
+      return;
+    }
+    if (this.selectedPieceId != null) {
+      const selectedPiece: Piece = this.game.pieces.find(p => p.id === this.selectedPieceId)!
+      selectedPiece.position.x = x;
+      selectedPiece.position.y = y;
+    }
+  }
 
   rows(n: number | undefined): number[] {
     const len = Math.max(0, n ?? 0);

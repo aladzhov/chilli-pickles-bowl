@@ -26,6 +26,7 @@ export class Piece {
   position!: Point;
   description?: Description;
   colidable: boolean = true; // If should replace the figure
+  selected: boolean = false;
 }
 
 export class Point {

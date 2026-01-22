@@ -3,10 +3,10 @@
     <!-- render rows top-to-bottom -->
     @for (y of rows(game.field.height); track y) {
       <div class="row">
-        <!-- render cols left-to-right -->
         @for (x of cols(game.field.width); track x) {
           <div
             class="cell"
+            (click)="onCellClick($event, x, y)"
             [style.background]="((x + y) % 2 === 0 ? (game.field.mainColor ?? '#fff') : (game.field.secondaryColor ?? '#ccc'))"
             role="gridcell"
             aria-rowindex="{{y + 1}}"
@@ -14,7 +14,11 @@
           >
             <div class="cell-inner">
               @for (piece of piecesAt(x, y); track piece) {
-                <app-piece [piece]="piece"></app-piece>
+                <app-piece
+                  [piece]="piece"
+                  (click)="selectPiece($event, piece)"
+                  [class.selected]="isSelected(piece)"
+                ></app-piece>
               }
             </div>
           </div>
