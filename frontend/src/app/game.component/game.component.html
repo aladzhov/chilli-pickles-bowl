@@ -18,6 +18,7 @@
                   [piece]="piece"
                   (click)="selectPiece($event, piece)"
                   [class.selected]="isSelected(piece)"
+                  (description)="showDescription($event, piece)"
                 ></app-piece>
               }
             </div>
@@ -30,3 +31,15 @@
     <app-secondary-area [game]="game"></app-secondary-area>
   </div>
 </div>
+
+@if (pieceDescription) {
+  <div class="description"
+       role="note">
+    <!-- render properties as a vertical list -->
+    @for (prop of descriptionTooltipProperties; track prop) {
+      <div class="prop-row">
+        {{ pieceDescription.description?.properties }}
+      </div>
+    }
+  </div>
+}

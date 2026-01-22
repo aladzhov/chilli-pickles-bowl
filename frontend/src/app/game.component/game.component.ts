@@ -19,6 +19,10 @@ export class GameComponent {
   @Output()
   closeRequest = new EventEmitter<void>();
 
+  pieceDescription: Piece | null = null;
+
+  descriptionTooltipProperties: Map<string, string> = new Map();
+
   selectedPieceId: number | null = null;
 
   selectPiece(event: MouseEvent, piece: Piece): void {
@@ -69,6 +73,15 @@ export class GameComponent {
   onWindowKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
       this.closeRequest.emit();
+    }
+  }
+
+
+  protected showDescription(showDescription: boolean, piece: Piece) {
+    if (showDescription) {
+      this.pieceDescription = piece;
+    } else {
+      this.pieceDescription = null;
     }
   }
 }

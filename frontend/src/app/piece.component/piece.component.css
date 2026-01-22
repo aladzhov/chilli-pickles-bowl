@@ -1,11 +1,3 @@
-/* ensure the image element behaves predictably */
-.piece-image {
-  display: block;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* non-colidable pieces: fill the whole square */
 .piece-image.full {
   width: 100%;
