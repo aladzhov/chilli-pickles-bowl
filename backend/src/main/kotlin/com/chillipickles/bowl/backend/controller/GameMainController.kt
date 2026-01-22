@@ -45,7 +45,7 @@ class GameMainController {
                     -1,
                     "Ball",
                     "blood-bowl-ball.png",
-                    PointDto(1, 1),
+                    PointDto(2, 2),
                     colidable = false
                 )
             ),

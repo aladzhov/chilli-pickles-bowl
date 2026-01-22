@@ -1,0 +1,209 @@
+/* container with subtle autumn-grass background */
+.setups-wrap {
+  padding: 20px;
+  border-radius: 12px;
+  color: #2b2b2b;
+  background-image:
+    linear-gradient(180deg, rgba(255,248,236,0.95), rgba(245,230,200,0.95)),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(34,89,34,0.04) 0px 10px,
+      rgba(255,140,0,0.03) 10px 20px
+    );
+  box-shadow: 0 8px 24px rgba(40,35,20,0.12);
+  min-height: 220px;
+}
+
+/* toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.toolbar h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #27321f;
+}
+
+/* create button */
+.create-btn {
+  background: linear-gradient(180deg,#ffb347 0%,#e67e22 100%);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(230,120,40,0.18);
+  font-weight: 600;
+}
+.create-btn:hover { transform: translateY(-2px); }
+
+/* cards layout */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* single card */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,250,240,0.85));
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid rgba(34,34,34,0.06);
+  box-shadow: 0 6px 14px rgba(30,30,20,0.06);
+
+  /* layout changes: stack vertically and make body grow */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 140px;
+  align-items: stretch;
+
+  /* small interaction polish */
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(30,30,20,0.12);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.title {
+  margin: 0;
+  font-size: 1rem;
+  color: #25321f;
+}
+.players {
+  background: rgba(39,50,31,0.08);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.card-body {
+  /* let the body take available space so actions stay at the bottom */
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* meta rows */
+.meta {
+  font-size: 0.9rem;
+  color: #46513b;
+}
+
+/* no setups fallback */
+.no-setups {
+  padding: 28px;
+  text-align: center;
+  color: #37433a;
+}
+.no-setups p {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+/* card actions */
+.card-actions {
+  /* keep actions aligned to the end and visually separated */
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+/* slightly larger action buttons for comfort */
+.card .create-btn {
+  padding: 8px 12px;
+  font-size: 0.95rem;
+}
+
+/* selected main view */
+.selected-game-main {
+  margin-top: 18px;
+  padding: 12px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* overlay dialog styles */
+.game-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  pointer-events: auto; /* allow clicks to be handled (backdrop / modal) */
+}
+
+/* add a dim backdrop (covers whole viewport) using a pseudo-element for a clean stacking context */
+.game-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.55);
+  z-index: 1200; /* sits below the modal (1201) but above page content */
+  pointer-events: auto;
+}
+
+/* make the modal full-screen so the inner dialog can occupy entire viewport */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1201;
+  pointer-events: auto;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: transparent; /* let pseudo-backdrop dim; content (modal-close + app-game) will render on top */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* keep the visual modal box for the game content, but allow it to be large and scrollable */
+.game-modal > .modal-content {
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: linear-gradient(180deg, #fff, #fff8f0);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 18px 40px rgba(20,20,20,0.35);
+  position: relative;
+  z-index: 1202;
+  box-sizing: border-box;
+}
+
+/* place the close button on top-right of viewport/modal */
+.modal-close {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1210;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}

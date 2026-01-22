@@ -1,0 +1,28 @@
+<div class="game-dialog">
+  <div class="field-wrap" [style.background]="game.field.mainColor ?? '#eee'">
+    <!-- render rows top-to-bottom -->
+    @for (y of rows(game.field.height); track y) {
+      <div class="row">
+        <!-- render cols left-to-right -->
+        @for (x of cols(game.field.width); track x) {
+          <div
+            class="cell"
+            [style.background]="((x + y) % 2 === 0 ? (game.field.mainColor ?? '#fff') : (game.field.secondaryColor ?? '#ccc'))"
+            role="gridcell"
+            aria-rowindex="{{y + 1}}"
+            aria-colindex="{{x + 1}}"
+          >
+            <div class="cell-inner">
+              @for (piece of piecesAt(x, y); track piece) {
+                <img class="piece-image" src="{{ piece.image }}" alt="{{ piece.name }}">
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+  <div class="secondary-area">
+
+  </div>
+</div>

@@ -1,0 +1,101 @@
+.field-wrap {
+  display: inline-block;
+  padding: 0; /* remove inner padding so rows touch edges exactly */
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  line-height: 0; /* remove gaps between inline-block rows */
+
+  /* ensure the board fits into the viewport height and into viewport width minus 360px on the right */
+  max-width: calc(100vw - 360px - 32px); /* 32px is padding/safety */
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+/* rows: full width, use flex and stretch children (cells) evenly, no gaps */
+.row {
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;          /* ensure row fills the field-wrap width */
+  align-items: stretch; /* make cells stretch vertically to match row height */
+}
+
+/* cells: evenly divide available row width, stay square, and prevent overflow */
+.cell {
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  flex: 1 1 0;       /* each cell takes equal portion of the row width */
+  min-width: 0;      /* allow proper flex shrink behaviour */
+  aspect-ratio: 1 / 1; /* force square cells: width == height */
+}
+
+/* make the game host cover the entire viewport and layout children left/right.
+   Important: align-items: stretch so children fill dialog height. */
+.game-dialog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px;
+  z-index: 1220;
+  background: transparent;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+/* left: main board area - always 2/3 of the dialog width, scrollable on its own */
+.field-wrap {
+  box-sizing: border-box;
+  flex: 0 0 66.6667%;   /* always 2/3 of dialog width */
+  max-width: 66.6667%;
+  height: calc(100vh - 32px); /* fill dialog height (respecting padding) */
+  overflow: auto; /* field-wrap scrolls itself */
+  padding: 0; /* rows touch edges exactly */
+  border-radius: 8px;
+  background-clip: padding-box;
+  display: block;
+}
+
+/* right: secondary area (sidebar) - one third of dialog width and full dialog height */
+.secondary-area {
+  box-sizing: border-box;
+  flex: 0 0 33.3333%; /* occupy 1/3 of the dialog width */
+  max-width: 33.3333%;
+  height: calc(100vh - 32px); /* stretch the whole dialog height (respecting padding) */
+  overflow: auto; /* sidebar scrolls itself */
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+/* make sure the field can't force the dialog wider than viewport */
+.field-wrap .row {
+  width: 100%;
+}
+
+/* responsive fallback: stack vertically on narrow screens */
+@media (max-width: 900px) {
+  .game-dialog {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+  }
+  .field-wrap, .secondary-area {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+    height: auto;
+    max-height: none;
+  }
+}

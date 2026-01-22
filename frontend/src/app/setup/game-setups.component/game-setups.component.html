@@ -1,21 +1,42 @@
-<div>
-@if (setups()) {
-  <table>
-    <thead>
-      <th>Name</th>
-      <th>Field</th>
-      <th>Dice</th>
-    </thead>
-    <tbody>
-      @for (setup of setups(); track setup.id) {
-        <td>{{ setup.name }}</td>
-        <td>{{ setup.field.type }}</td>
-        <td>{{ setup.dice?.length }}</td>
+<div class="setups-wrap">
+  <header class="toolbar">
+    <h2>Game Setups</h2>
+    <button class="create-btn">Create new</button>
+  </header>
+
+  @if(setups()?.length) {
+    <div class="cards">
+      @for(setup of setups(); track setup.id) {
+        <article class="card">
+          <div class="card-header">
+            <h3 class="title">{{ setup.name }}</h3>
+            <span class="players">{{ setup.players?.length || 0 }} players</span>
+          </div>
+          <div class="card-body">
+            <div class="meta"><strong>Field:</strong> {{ setup.field?.type || '—' }}</div>
+            <div class="meta"><strong>Dice:</strong> {{ setup.dice?.length || 0 }}</div>
+          </div>
+          <div class="card-actions">
+            <button class="create-btn" (click)="openInDialog(setup)">Open (dialog)</button>
+          </div>
+        </article>
       }
-    </tbody>
-  </table>
-} @else {
-  <p>No setups...</p>
-  <button>Create a new</button>
-}
+    </div>
+  } @else {
+    <ng-template>
+      <div class="no-setups">
+        <p>No setups available.</p>
+        <button class="create-btn">Create a new</button>
+      </div>
+    </ng-template>
+  }
+
+  @if (selectedGame) {
+    <div class="game-overlay">
+      <div class="game-modal" role="dialog" aria-modal="true">
+        <button class="modal-close" aria-label="Close" (click)="close()">✕</button>
+        <app-game [game]="selectedGame" (closeRequest)="close()"></app-game>
+      </div>
+    </div>
+  }
 </div>
