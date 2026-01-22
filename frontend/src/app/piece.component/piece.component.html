@@ -1,6 +1,10 @@
-<img class="piece-image"
-     src="{{ piece.image }}"
-     alt="{{ piece.name }}"
-     [class.full]="!piece.colidable"
-     [class.colidable]="piece.colidable"
+<div class="piece-host">
+  <img class="piece-image"
+       src="{{ piece.image }}"
+       alt="{{ piece.name }}"
+       [class.full]="!piece.colidable"
+       [class.colidable]="piece.colidable"
+       (mouseenter)="onImageEnter()"
+       (mouseleave)="onImageLeave()"
 />
+</div>
