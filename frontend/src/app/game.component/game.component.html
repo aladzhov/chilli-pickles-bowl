@@ -19,6 +19,7 @@
                   (click)="selectPiece($event, piece)"
                   [class.selected]="isSelected(piece)"
                   (description)="showDescription($event, piece)"
+                  [attr.data-piece-id]="piece.id"
                 ></app-piece>
               }
             </div>
@@ -33,12 +34,17 @@
 </div>
 
 @if (pieceDescription) {
-  <div class="description"
-       role="note">
+  <div
+    class="description tooltip"
+    role="note"
+    [style.left.px]="tooltipLeft"
+    [style.bottom.px]="tooltipBottom"
+  >
     <!-- render properties as a vertical list -->
     @for (prop of descriptionTooltipProperties; track prop) {
       <div class="prop-row">
-        {{ pieceDescription.description?.properties }}
+        <div class="prop-key">{{ prop.key }}</div>
+        <div class="prop-value">{{ prop.value }}</div>
       </div>
     }
   </div>

@@ -132,3 +132,44 @@ app-piece.selected {
     max-height: none;
   }
 }
+
+/* tooltip shown outside the piece: fixed so we can position by viewport coordinates */
+.tooltip {
+  position: fixed;
+  z-index: 2000;
+  min-width: 160px;
+  max-width: 320px;
+  background: rgba(255,255,255,0.98);
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column; /* properties in a column */
+  gap: 6px;
+  pointer-events: auto; /* allow hover to keep it open */
+  transform-origin: bottom left;
+}
+
+/* each property row */
+.prop-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+/* key/value styling */
+.prop-key {
+  font-weight: 700;
+  margin-right: 6px;
+  color: #444;
+}
+.prop-value {
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

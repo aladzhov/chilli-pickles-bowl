@@ -46,7 +46,12 @@ class GameMainController {
                     "Ball",
                     "blood-bowl-ball.png",
                     PointDto(2, 2),
-                    colidable = false
+                    colidable = false,
+                    description = DescriptionDto(
+                        mapOf(
+                            Pair("MA", "6"), Pair("ST", "3"), Pair("AG", "3+"), Pair("PA", "4+"), Pair("AV", "9+")
+                        )
+                    )
                 ),
                 PieceDto(
                     2,
@@ -54,7 +59,12 @@ class GameMainController {
                     "cultist",
                     "deamonsofslaanesh/cultist.png",
                     PointDto(3, 13),
-                    colidable = true
+                    colidable = true,
+                    description = DescriptionDto(
+                        mapOf(
+                            Pair("MA", "6"), Pair("ST", "3"), Pair("AG", "3+"), Pair("PA", "4+"), Pair("AV", "9+")
+                        )
+                    )
                 ),
                 PieceDto(
                     3,
@@ -62,7 +72,12 @@ class GameMainController {
                     "cultist",
                     "deamonsofslaanesh/cultist.png",
                     PointDto(5, 13),
-                    colidable = true
+                    colidable = true,
+                    description = DescriptionDto(
+                        mapOf(
+                            Pair("MA", "6"), Pair("ST", "3"), Pair("AG", "3+"), Pair("PA", "4+"), Pair("AV", "9+")
+                        )
+                    )
                 ),
                 PieceDto(
                     4,
@@ -70,7 +85,12 @@ class GameMainController {
                     "deamonette",
                     "deamonsofslaanesh/deamonette.png",
                     PointDto(7, 12),
-                    colidable = true
+                    colidable = true,
+                    description = DescriptionDto(
+                        mapOf(
+                            Pair("MA", "7"), Pair("ST", "3"), Pair("AG", "2+"), Pair("PA", "-"), Pair("AV", "8+")
+                        )
+                    )
                 ),
                 PieceDto(
                     5,
@@ -78,7 +98,12 @@ class GameMainController {
                     "keeper of secrets",
                     "deamonsofslaanesh/keeperofsecrets.png",
                     PointDto(7, 10),
-                    colidable = true
+                    colidable = true,
+                    description = DescriptionDto(
+                        mapOf(
+                            Pair("MA", "7"), Pair("ST", "5"), Pair("AG", "2+"), Pair("PA", "-"), Pair("AV", "9+")
+                        )
+                    )
                 )
             ),
             field = FieldDto(

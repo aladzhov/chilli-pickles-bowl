@@ -17,7 +17,7 @@ export class PieceComponent implements OnDestroy {
   description = new EventEmitter<boolean>();
 
   private hoverTimer: any = null;
-  private hoverDelay = 2000;
+  private hoverDelay = 1000;
 
   onImageEnter(): void {
     console.log('entered')

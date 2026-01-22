@@ -21,7 +21,12 @@ export class GameComponent {
 
   pieceDescription: Piece | null = null;
 
-  descriptionTooltipProperties: Map<string, string> = new Map();
+  // description properties for template
+  descriptionTooltipProperties: { key: string; value: any }[] = [];
+
+  // tooltip fixed position (px)
+  tooltipLeft: number | null = null;
+  tooltipBottom: number | null = null;
 
   selectedPieceId: number | null = null;
 
@@ -76,12 +81,44 @@ export class GameComponent {
     }
   }
 
-
+  // show or hide the tooltip for a given piece
   protected showDescription(showDescription: boolean, piece: Piece) {
-    if (showDescription) {
-      this.pieceDescription = piece;
+    if (showDescription && piece.description && piece.description.properties && piece.description.properties.size > 0) {
+      this.setTooltipForPiece(piece);
     } else {
-      this.pieceDescription = null;
+      this.clearTooltip();
     }
+  }
+
+  private setTooltipForPiece(piece: Piece): void {
+    const host = document.querySelector(`app-piece[data-piece-id="${piece.id}"]`) as HTMLElement | null;
+
+    if (host) {
+      const rect = host.getBoundingClientRect();
+      this.tooltipLeft = Math.round(rect.right);
+      this.tooltipBottom = Math.round(window.innerHeight - rect.top);
+    } else {
+      this.tooltipLeft = Math.round(window.innerWidth / 2);
+      this.tooltipBottom = Math.round(window.innerHeight / 2);
+    }
+
+    this.pieceDescription = piece;
+    this.descriptionTooltipProperties = this.extractProps(piece);
+  }
+
+  private clearTooltip(): void {
+    this.pieceDescription = null;
+    this.descriptionTooltipProperties = [];
+    this.tooltipLeft = null;
+    this.tooltipBottom = null;
+  }
+
+  private extractProps(piece: Piece): { key: string; value: any }[] {
+    const map = piece?.description?.properties;
+    if (!map) return [];
+    if (typeof (map as any).entries === 'function') {
+      return Array.from((map as any).entries()).map(([k, v]: any) => ({ key: String(k), value: v }));
+    }
+    return Object.keys(map).map(k => ({ key: k, value: (map as any)[k] }));
   }
 }
