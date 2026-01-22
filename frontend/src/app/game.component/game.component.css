@@ -52,7 +52,6 @@
   box-sizing: border-box;
 }
 
-/* left: main board area - always 2/3 of the dialog width, scrollable on its own */
 .field-wrap {
   box-sizing: border-box;
   flex: 0 0 66.6667%;   /* always 2/3 of dialog width */
@@ -65,7 +64,6 @@
   display: block;
 }
 
-/* right: secondary area (sidebar) - one third of dialog width and full dialog height */
 .secondary-area {
   box-sizing: border-box;
   flex: 0 0 33.3333%; /* occupy 1/3 of the dialog width */
@@ -79,11 +77,6 @@
   box-shadow: 0 8px 18px rgba(0,0,0,0.06);
 }
 
-/* make sure the field can't force the dialog wider than viewport */
-.field-wrap .row {
-  width: 100%;
-}
-
 /* responsive fallback: stack vertically on narrow screens */
 @media (max-width: 900px) {
   .game-dialog {
@@ -91,7 +84,7 @@
     align-items: stretch;
     padding: 12px;
   }
-  .field-wrap, .secondary-area {
+  .field-wrap {
     width: 100%;
     max-width: 100%;
     flex: 0 0 100%;

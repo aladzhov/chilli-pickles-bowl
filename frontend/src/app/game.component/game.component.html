@@ -14,7 +14,7 @@
           >
             <div class="cell-inner">
               @for (piece of piecesAt(x, y); track piece) {
-                <img class="piece-image" src="{{ piece.image }}" alt="{{ piece.name }}">
+                <app-piece [piece]="piece"></app-piece>
               }
             </div>
           </div>
@@ -23,6 +23,6 @@
     }
   </div>
   <div class="secondary-area">
-
+    <app-secondary-area [game]="game"></app-secondary-area>
   </div>
 </div>

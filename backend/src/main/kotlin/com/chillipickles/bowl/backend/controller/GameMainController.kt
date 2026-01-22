@@ -47,6 +47,38 @@ class GameMainController {
                     "blood-bowl-ball.png",
                     PointDto(2, 2),
                     colidable = false
+                ),
+                PieceDto(
+                    2,
+                    1,
+                    "cultist",
+                    "deamonsofslaanesh/cultist.png",
+                    PointDto(3, 13),
+                    colidable = true
+                ),
+                PieceDto(
+                    3,
+                    1,
+                    "cultist",
+                    "deamonsofslaanesh/cultist.png",
+                    PointDto(5, 13),
+                    colidable = true
+                ),
+                PieceDto(
+                    4,
+                    1,
+                    "deamonette",
+                    "deamonsofslaanesh/deamonette.png",
+                    PointDto(7, 12),
+                    colidable = true
+                ),
+                PieceDto(
+                    5,
+                    1,
+                    "keeper of secrets",
+                    "deamonsofslaanesh/keeperofsecrets.png",
+                    PointDto(7, 10),
+                    colidable = true
                 )
             ),
             field = FieldDto(

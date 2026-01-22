@@ -1,0 +1,17 @@
+<aside class="secondary-area">
+  <div class="players">
+    @for (player of game.players; track player) {
+      <app-player-dashboard [player]="player"></app-player-dashboard>
+    }
+  </div>
+
+  @if (game.dice) {
+    <div class="dice-area">
+      <app-dice [dice]="game.dice"></app-dice>
+    </div>
+  }
+
+  <div class="log-area">
+    <textarea class="game-log"></textarea>
+  </div>
+</aside>

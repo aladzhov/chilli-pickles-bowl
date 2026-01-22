@@ -1,11 +1,13 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Game} from '../objects/game.data';
+import { SecondaryAreaComponent } from '../secondary-area.component/secondary-area.component';
+import {PieceComponent} from '../piece.component/piece.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SecondaryAreaComponent, PieceComponent],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })

@@ -1,0 +1,80 @@
+.secondary-area {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+.players {
+  flex: 0 0 60%;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 6px;
+  box-sizing: border-box;
+}
+
+/* ensure each player dashboard fills available space evenly */
+.players > * {
+  flex: 1 1 0;               /* share the players area evenly */
+  min-height: 0;            /* enable correct flexbox scrolling behavior */
+  display: flex;            /* allow the child to layout its internals and stretch */
+  flex-direction: column;   /* vertical layout inside each player item */
+}
+
+.dice-area {
+  flex: 0 0 20%;
+  min-height: 0;
+  overflow: auto;
+  margin-top: 8px;
+  box-sizing: border-box;
+  padding: 6px 0;
+}
+
+.log-area {
+  flex: 0 0 20%;
+  min-height: 0;
+  margin-top: 8px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+}
+
+/* textarea fills the log area */
+.game-log {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #222;
+  overflow: auto;
+}
+
+/* small responsive tweak: stack vertically on narrow screens */
+@media (max-width: 900px) {
+  .secondary-area {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .dice-area, .log-area {
+    flex: 0 0 auto;
+    height: auto;
+  }
+}
